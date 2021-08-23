@@ -42,12 +42,16 @@ function decode(expr) {
     for ( let i = 0 ; i < expr.length ; i = i + 10 ) {
         let oneSymbol = expr.slice( i, i + 10 );
         let morseSymbol = '';  
-        let binarySymbol = 0; 
-        if ( oneSymbol === '**********' ) { result.push(' ') };
-        for ( let j = 0 ; j < oneSymbol.length ; j = j + 2 ) {
-            binarySymbol = oneSymbol.slice(j, j + 2);
-            if ( binarySymbol === 10 ) { morseSymbol =  morseSymbol + '.' }
-            else { morseSymbol =  morseSymbol + '-' }; 
+        let binarySymbol = ''; 
+        if ( oneSymbol === '**********' ) { 
+            result.push(' ');
+            continue;
+        };
+        for ( let j = 0 ; j < 10 ; j = j + 2 ) {
+            binarySymbol = oneSymbol.slice( j, j + 2 );
+            if ( binarySymbol === 00 ) { morseSymbol =  morseSymbol };
+            if ( binarySymbol === 10 ) { morseSymbol =  morseSymbol + '.' };
+            if ( binarySymbol === 11 ) { morseSymbol =  morseSymbol + '-' }; 
         }
         result.push(MORSE_TABLE[morseSymbol]);
     };
